@@ -65,6 +65,52 @@ class Agent:
         return completion.choices[0].message.content
 
 ```
+# Agent's Tools: `calculate` and `get_planet_mass`
+
+### Purpose
+These functions are part of the agent's toolset, used to handle specific operations required by the agent in its task execution. The tools allow the agent to perform calculations and retrieve the mass of various planets.
+
+### 1. `calculate` Function
+
+This function performs a mathematical operation based on a string input. It uses Python's `eval` function to evaluate the expression provided.
+
+#### Parameters:
+- `operation` (str): A string representing a mathematical operation to be evaluated (e.g., `"2 + 2"`).
+
+#### Returns:
+- A `float` representing the result of the evaluated operation.
+
+#### Example:
+```python
+calculate("5 * 10")  # Returns: 50.0
+```
+### 2. `get_planet_mass` Function
+
+#### Parameters
+- `planet` (str): The name of the planet whose mass is to be fetched. The input is case-insensitive (e.g., "Earth" or "earth").
+
+#### Returns
+- A `float` representing the mass of the planet in kilograms. The mass is returned in scientific notation (e.g., `5.972e24` for Earth).
+- If the planet is not recognized, the function returns `0.0`.
+
+### Supported Planets and Their Masses:
+- **Earth**: `5.972e24` kg
+- **Jupiter**: `1.898e27` kg
+- **Mars**: `6.39e23` kg
+- **Mercury**: `3.285e23` kg
+- **Neptune**: `1.024e26` kg
+- **Saturn**: `5.683e26` kg
+- **Uranus**: `8.681e25` kg
+- **Venus**: `4.867e24` kg
+
+### Example Usage
+```python
+get_planet_mass("earth")  # Returns: 5.972e24
+get_planet_mass("jupiter")  # Returns: 1.898e27
+get_planet_mass("mars")  # Returns: 6.39e23
+get_planet_mass("pluto")  # Returns: 0.0 (not in the list)
+```
+
 # ReAct Agent Loop Function
 
 This `loop` function drives the interaction between the agent and tools in an iterative process. It enables the agent to execute actions based on its responses and adaptively refine its behavior until a conclusion is reached.
