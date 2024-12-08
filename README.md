@@ -1,6 +1,6 @@
 # ReAct-agent-from-scratch-using-only-python-
 
-# Agent Class for ReAct Framework
+# ReAct Agent Class for ReAct
 
 This `Agent` class is designed to interact with an LLM (e.g., Groq's API) while implementing the ReAct (Reasoning + Acting) framework. It handles conversation flow, maintains message history, and sends prompts to the model.
 
