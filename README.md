@@ -63,3 +63,18 @@ class Agent:
             model="llama3-70b-8192", messages=self.messages
         )
         return completion.choices[0].message.content
+
+
+# ReAct Agent Loop Function
+
+This `loop` function drives the interaction between the agent and tools in an iterative process. It enables the agent to execute actions based on its responses and adaptively refine its behavior until a conclusion is reached.
+
+---
+
+## Code Breakdown
+
+### **Function Signature**
+```python
+def loop(max_iterations=10, query: str = ""):
+
+
