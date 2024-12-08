@@ -221,4 +221,8 @@ Here is a Snapshot of the manual Excution
 ![image](https://github.com/user-attachments/assets/b834b6f9-855b-4f1d-8cdc-adf5164c977b)
 
 
+# Resource
+
+Check out this helpful video for more information:  
+[Watch the video](https://www.youtube.com/watch?v=hKVhRA9kfeM)
 
