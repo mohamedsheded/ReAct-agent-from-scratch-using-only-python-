@@ -71,10 +71,73 @@ This `loop` function drives the interaction between the agent and tools in an it
 
 ---
 
-## Code Breakdown
 
-### **Function Signature**
+
+## `loop` Function Explanation
+
+### Purpose
+The `loop` function executes a process in a loop, iterating up to a specified number of times (`max_iterations`) to generate results using an agent. It parses the result of each iteration, checks if any specific actions (like calculating or retrieving data) need to be performed, and updates the prompt accordingly.
+
+### Parameters
+- `max_iterations` (int): The maximum number of iterations the loop will execute. The default is 10.
+- `query` (str): A string that represents the initial query passed to the agent. Default is an empty string.
+
+### Function Workflow
+1. **Agent Initialization**: 
+   An agent is created using the provided `client` and `system_prompt`, though their definitions are assumed to be declared elsewhere.
+
+2. **Tools**:
+   The function defines a list of tools (`["calculate", "get_planet_mass"]`) that can be called based on the result from the agent.
+
+3. **Iteration Loop**:
+   The loop runs for up to `max_iterations`:
+   - Each iteration, the agent is called with the current `next_prompt`, and the result is printed.
+   - The result is checked for certain keywords (`PAUSE` and `Action`). If these are found:
+     - An action is extracted using regular expressions to determine the chosen tool and its argument.
+     - If the chosen tool is available in the predefined `tools` list, it evaluates the result of calling that tool (e.g., calculating or getting planet mass).
+     - If the tool is not in the list, the prompt is updated to reflect the absence of the tool.
+   - If an "Answer" is found in the result, the loop ends.
+
+4. **Regular Expression Usage**:
+   The `re.findall` function is used to extract the action from the result if it contains specific information related to an action.
+
+5. **Final Output**:
+   The function prints the result and updates the `next_prompt` based on whether the tool was found or not.
+
+### Code:
+
 ```python
+import re
+
 def loop(max_iterations=10, query: str = ""):
+    agent = Agent(client=client, system=system_prompt)
+    tools = ["calculate", "get_planet_mass"]
+    next_prompt = query
+    i = 0
+
+    while i < max_iterations:
+        i += 1
+        result = agent(next_prompt)
+        print(result)
+
+        if "PAUSE" in result and "Action" in result:
+            action = re.findall(r"Action: ([a-z_]+): (.+)", result, re.IGNORECASE)
+            chosen_tool = action[0][0]
+            arg = action[0][1]
+
+            if chosen_tool in tools:
+                result_tool = eval(f"{chosen_tool}('{arg}')")
+                next_prompt = f"Observation: {result_tool}"
+            else:
+                next_prompt = "Observation: Tool not found"
+
+            print(next_prompt)
+            continue
+
+        if "Answer" in result:
+            break
+
+loop(query="What is the mass of Earth plus the mass of Saturn and all of that times 2?")
+
 
 
