@@ -73,7 +73,11 @@ These functions are part of the agent's toolset, used to handle specific operati
 ### 1. `calculate` Function
 
 This function performs a mathematical operation based on a string input. It uses Python's `eval` function to evaluate the expression provided.
-
+#### Code:
+```python
+def calculate(operation: str) -> float:
+    return eval(operation)
+```
 #### Parameters:
 - `operation` (str): A string representing a mathematical operation to be evaluated (e.g., `"2 + 2"`).
 
@@ -85,6 +89,29 @@ This function performs a mathematical operation based on a string input. It uses
 calculate("5 * 10")  # Returns: 50.0
 ```
 ### 2. `get_planet_mass` Function
+#### Code
+```python
+def get_planet_mass(planet) -> float:
+    match planet.lower():
+        case "earth":
+            return 5.972e24
+        case "jupiter":
+            return 1.898e27
+        case "mars":
+            return 6.39e23
+        case "mercury":
+            return 3.285e23
+        case "neptune":
+            return 1.024e26
+        case "saturn":
+            return 5.683e26
+        case "uranus":
+            return 8.681e25
+        case "venus":
+            return 4.867e24
+        case _:
+            return 0.0
+```
 
 #### Parameters
 - `planet` (str): The name of the planet whose mass is to be fetched. The input is case-insensitive (e.g., "Earth" or "earth").
