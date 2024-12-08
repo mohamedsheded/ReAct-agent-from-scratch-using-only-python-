@@ -211,6 +211,14 @@ def loop(max_iterations=10, query: str = ""):
             break
 
 loop(query="What is the mass of Earth plus the mass of Saturn and all of that times 2?")
+```
+# Manual Execution with Loop Function
+
+### Purpose
+This section explains the intention behind the creation of the `loop` function.
+Here is a Snapshot of the manual Excution 
+![image](https://github.com/user-attachments/assets/cdb8ec76-3d5b-44a9-b828-d49ffe29f518)
+![image](https://github.com/user-attachments/assets/b834b6f9-855b-4f1d-8cdc-adf5164c977b)
 
 
 
